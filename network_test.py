@@ -1,7 +1,7 @@
 import requests
 import httpx
 import asyncio
-
+import time
 def test_basic_connectivity():
     """测试基础网络连接"""
     print("🌐 测试基础网络连接...")
