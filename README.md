@@ -1,10 +1,20 @@
-# PCB工具后端项目
+# PCB工具全栈项目
 
-一个支持多用户并发的PCB电路设计和分析工具的后端服务。基于FastAPI构建，支持用户隔离、会话管理和流式处理。
+一个完整的PCB电路设计和分析工具，包含FastAPI后端服务和Gradio前端界面。支持多用户并发、用户隔离、会话管理和流式处理，提供现代化的Web界面体验。
 
 ## 🌟 功能特性
 
-- 🚀 **高性能并发**: 支持5个以上并发请求处理
+### 🖥️ 前端界面
+- 🎨 **现代化UI**: 基于Gradio 4.x的美观现代界面
+- 📱 **响应式设计**: 自适应不同屏幕尺寸
+- 🔐 **用户认证**: 完整的登录注册系统
+- 💬 **会话管理**: 直观的项目会话管理
+- 📷 **图片上传**: 拖拽上传，支持多种格式
+- 📊 **实时分析**: 流式响应和进度显示
+- 🛠️ **交互式编辑**: 可编辑的BOM清单和参数
+
+### ⚙️ 后端服务
+- 🚀 **高性能并发**: 支持15+并发请求处理
 - 👥 **用户隔离**: 完整的用户注册、登录和权限管理
 - 💬 **会话管理**: 每次请求封装为独立的对话会话
 - 🔒 **安全认证**: JWT令牌认证和用户权限控制
@@ -40,7 +50,7 @@
 
 ```
 PCBTool/
-├── app/
+├── app/                     # 后端应用
 │   ├── __init__.py
 │   ├── main.py              # FastAPI应用入口
 │   ├── config.py            # 配置管理
@@ -70,6 +80,10 @@ PCBTool/
 │   └── core/                # 核心功能
 │       ├── deps.py          # 依赖注入
 │       └── exceptions.py    # 异常处理
+├── frontend_enhanced.py     # 增强版Gradio前端界面
+├── frontend_new.py          # 基础版前端界面
+├── start_full_app.bat       # 一键启动脚本
+├── FRONTEND_README.md       # 前端使用说明
 ├── uploads/                 # 用户文件存储
 ├── tests/                   # 测试文件
 ├── docker-compose.yml       # Docker编排
@@ -101,18 +115,24 @@ cp .env.example .env
 # 编辑.env文件，配置必要的API密钥和数据库连接
 ```
 
-### 3. 启动服务
+### 3. 启动完整应用
 
-#### 方式一：直接启动
+#### 🎯 推荐方式：一键启动
 ```bash
-# Windows
-start.bat
-
-# 或者手动启动
-python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+# Windows - 同时启动后端和前端
+start_full_app.bat
 ```
 
-#### 方式二：Docker启动
+#### 方式二：分别启动
+```bash
+# 启动后端服务 (端口8000)
+python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+
+# 启动前端界面 (端口7860)
+python frontend_enhanced.py
+```
+
+#### 方式三：Docker启动
 ```bash
 # 构建并启动所有服务
 docker-compose up -d
@@ -121,7 +141,16 @@ docker-compose up -d
 docker-compose ps
 ```
 
-### 4. 验证安装
+### 4. 访问应用
+
+启动成功后，访问以下地址：
+
+- **🖥️ 前端界面**: http://localhost:7860 (主要使用入口)
+- **📚 API文档**: http://localhost:8000/docs
+- **📖 ReDoc**: http://localhost:8000/redoc
+- **💚 健康检查**: http://localhost:8000/health
+
+### 5. 验证安装
 
 ```bash
 # 运行快速测试
@@ -130,6 +159,37 @@ python quick_test.py
 # 运行并发测试
 python concurrent_test.py load 5
 ```
+
+## 🎨 前端界面功能
+
+### 🔐 用户系统
+- 用户注册和登录
+- 安全的会话管理
+- 个人项目隔离
+
+### 📷 图片分析
+- 支持PNG、JPG、JPEG格式
+- 拖拽上传，操作简便
+- AI智能电路识别
+- 实时分析结果显示
+
+### 📊 BOM管理
+- 自动组件识别
+- 多供应商价格对比
+- 可编辑的组件清单
+- 自动总价计算
+
+### ⚡ 代码生成
+- 基于电路自动生成控制代码
+- 支持多种编程语言
+- 语法高亮显示
+- 一键复制代码
+
+### 📚 部署指南
+- 详细的硬件连接说明
+- 软件部署步骤
+- 完整的实施方案
+- 文本转语音功能
 
 ## 📖 API文档
 
